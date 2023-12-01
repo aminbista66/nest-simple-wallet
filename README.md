@@ -49,7 +49,7 @@ $ yarn run start:prod
 ```bash
 
 #generate migrations
-$ npm run makemigration --name= <name of migration>
+$ npm run makemigrations --name= <name of migration>
 
 #commit migration
 $ npm run migrate
