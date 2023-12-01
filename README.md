@@ -45,6 +45,17 @@ $ yarn run start:dev
 $ yarn run start:prod
 ```
 
+## Database Migrations
+```bash
+
+#generate migrations
+$ npm run makemigration --name= <name of migration>
+
+#commit migration
+$ npm run migrate
+
+```
+
 ## Test
 
 ```bash
