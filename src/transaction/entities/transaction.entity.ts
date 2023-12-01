@@ -13,10 +13,10 @@ export class Transaction {
     @Column({default: 0})
     amount: number;
 
-    @ManyToOne(()=> User, (user)=> user.receivedTransactions)
+    @ManyToOne(()=> User, (user)=> user.receivedTransactions, {cascade: true})
     receiver: User;
 
-    @ManyToOne(()=> User, (user) => user.sentTransactions)
+    @ManyToOne(()=> User, (user) => user.sentTransactions, {cascade: true})
     sender: User;
 
     @CreateDateColumn()

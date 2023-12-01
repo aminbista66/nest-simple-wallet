@@ -1,4 +1,14 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { TransactionService } from './transaction.service';
+import { AuthGuard } from '@nestjs/passport';
 
-@Controller('transaction')
-export class TransactionController {}
+@Controller('transactions')
+@UseGuards(AuthGuard('jwt'))
+export class TransactionController {
+    constructor(private transactionService: TransactionService) {}
+
+    @Get('')
+    async getAll(@Req() request) {
+        return await this.transactionService.getAll(request.user);
+    }
+}
