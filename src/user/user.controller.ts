@@ -1,18 +1,14 @@
 import {
   Body,
   Controller,
-  Get,
-  Param,
-  ParseIntPipe,
   Post,
+  Get,
   Req,
-  UseGuards,
+  UseGuards
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserCreateDTO } from './dto/user-create.dto';
-import { UserCredsDTO } from './dto/user-credential.dto';
 import { AuthGuard } from '@nestjs/passport';
-import { Request } from 'express';
 
 @Controller('user')
 export class UserController {
@@ -23,21 +19,6 @@ export class UserController {
     return this.userService.createUser(requestBody);
   }
 
-  @Post('signin')
-  signin(@Body() requestBody: UserCredsDTO) {
-    return this.userService.signin(requestBody);
-  }
 
-  @Post('signout')
-  @UseGuards(AuthGuard('jwt'))
-  signout(@Req() request: Request) {
-    const token = request.headers.authorization?.split(' ')[1];
-    return this.userService.signout(token);
-  }
 
-  @Post('echo')
-  @UseGuards(AuthGuard('jwt'))
-  getUser(@Req() req: Request) {
-    return { message: 'Congrats! You are authenticated!', echo: req.body };
-  }
 }

@@ -3,11 +3,11 @@ import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { User } from 'src/user/entities/use.entity';
+import { User } from 'src/user/entities/user.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
+export class JWTStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor(
     public configService: ConfigService,
     @InjectRepository(User) private userRepository: Repository<User>,
@@ -20,7 +20,7 @@ export class AccessTokenStrategy extends PassportStrategy(Strategy, 'jwt') {
   }
 
   async validate(payload: any) {
-    const user = await this.userRepository.findOneBy(payload.id);
+    const user = await this.userRepository.findOneBy({id: payload.id});
     delete user.password;
     return user;
   }
