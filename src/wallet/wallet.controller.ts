@@ -2,7 +2,9 @@ import { Controller, Get, UseGuards, Req, Post, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { WalletService } from './wallet.service';
 import { FundTransferDTO } from './dtos/fund-transfer.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags("Wallet")
 @Controller('wallet')
 export class WalletController {
   constructor(private readonly walletService: WalletService) {}
@@ -21,6 +23,7 @@ export class WalletController {
       transferPayload.receiverId,
       transferPayload.amount,
       request.user,
+      transferPayload.transactionPin
     );
   }
 }

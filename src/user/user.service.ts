@@ -18,6 +18,7 @@ export class UserService {
     const user = new User({
       username: requestBody.username,
       email: requestBody.email,
+      transactionPin: requestBody.transactionPin,
       password: await argon.hash(requestBody.password),
       wallet: wallet
     });

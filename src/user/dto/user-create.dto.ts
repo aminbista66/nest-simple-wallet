@@ -6,4 +6,6 @@ export class UserCreateDTO {
 
     @IsEmail()
     email: string;
+
+    transactionPin: string;
 }

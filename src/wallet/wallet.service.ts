@@ -22,9 +22,13 @@ export class WalletService {
     return wallet
   }
 
-  async fundTransfer(receiverId:string, amount:number, user: User) {
+  async fundTransfer(receiverId:string, amount:number, user: User, transactionPin: string) {
+    if (transactionPin !== user.transactionPin) {
+      throw new ForbiddenException("Transaction Pin didnot match")
+    }
+
     const senderWallet = await this.walletSummary(user);
-    const receiver = await this.userRepository.findOneBy({id: receiverId});
+    const receiver = await this.userRepository.findOneBy({email: receiverId});
 
     if (senderWallet.balance < amount) {
         throw new ForbiddenException("Not enough balance")

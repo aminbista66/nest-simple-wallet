@@ -20,6 +20,9 @@ export class User {
   @Column({ unique: true })
   email: string;
 
+  @Column({length: 4})
+  transactionPin: string;
+
   @OneToOne(() => Wallet, {cascade: true})
   @JoinColumn()
   wallet: Wallet
