@@ -10,7 +10,7 @@ export class WalletController {
   constructor(private readonly walletService: WalletService) {}
 
   @Get('wallet-summary')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'))  
   async walletSummary(@Req() request) {
     const { user } = request;
     return await this.walletService.walletSummary(user);
